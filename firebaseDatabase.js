@@ -8,20 +8,27 @@ var config = {
   };
   firebase.initializeApp(config);
 
-//user id
- const auth = firebase.auth();
+  //initial firbase authentication
+  const auth = firebase.auth();
 
- //initial var
+  //initial var user id
   var uid = '';
   //onStateAuthChange
    auth.onAuthStateChanged(function(user) {
   if (user) {
-    // User is signed in.
+  // when User is signed in.
+
+    //getuser id
    uid = user.uid;
    console.log("uid: " + uid);
-     const database = firebase.database();
+
+   //initial firebase database
+    const database = firebase.database();
+  
+  //initial ref data for user database
   const refdata = database.ref('users/'+uid);
 
+  //event on value change
   refdata.on('value',snap=>{
     console.log(snap.val());
   });
@@ -32,36 +39,46 @@ var config = {
   button.addEventListener('click',()=>{
     //get nama and umur
     var nama = document.getElementById('nama');
-    var umur = document.getElementById('umur');
-    createData(nama.value,umur.value);
+    createData(nama.value);
 
   });
 
-  function createData(nama,umur){
+
+  }
+  else{
+
+   uid= '';
+   console.log("uid: undefined" );
+   window.location.assign('C:/Users/L1-11/Desktop/New folder/index.html');
+  }
+});
+
+
+ /*
+ @TODO: biodata user
+        update biodata user
+      */  
+
+  //RESTFUL API
+    //Create Data
+  function createData(nama){
     console.log('halo');
     var ref = database.ref('users/'+uid);
     ref.set({
       'nama' : nama, 
-      'umur' : umur
+      'photoProfulUrl' : '',
+      'statusProfil': '',
+  
     }).then(()=>{
       console.log("success");
     }).catch(function(error) {
     console.log('Synchronization failed');
   });
+   }
 
- /* var adaNameRef = database.ref('users/'+nama);
-adaNameRef.child('nama').set(nama);
-adaNameRef.child('umur').set(umur);
- */ }
-  }
-  else{
+  //Update Data
+  function updateData(dataObject){
+    var ref = firebase.database().ref('users/' + uid);
 
-   uid= '';
-   console.log("uid: " + uid);
-   window.location.assign('C:/Users/L1-11/Desktop/New folder/index.html');
+    ref.update(dataObject);
   }
-});
- /*
- @TODO: biodata user
-        update biodata user
-      */  

@@ -50,15 +50,14 @@ const auth = firebase.auth();
   var log = document.getElementById('log');
 
   //initial var
-  var uid = '';
+  var uid = 'DIGIDAW';
   //onStateAuthChange
    auth.onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-   login.style.display = "none";
-   logout.style.display = "initial";
    uid = user.uid;
-    log.innerText = "logged";
+  console.log(uid);
+
   }
   else{
 
@@ -110,9 +109,15 @@ const auth = firebase.auth();
 
 
   //signout
+  if(logout){
   logout.addEventListener('click',()=>{
     auth.signOut();
     console.log("d");
   });
+}
 
 
+console.log(uid);
+document.getElementById('klik').addEventListener('click',()=>{
+  console.log(uid);
+});

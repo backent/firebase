@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+ 	<script src="./library/firebaseInitialize.js"></script>
+ 	<script src="./library/firebaseAuth.js"></script>
+ 	<script src="./library/firebaseDatabase.js"></script>
+ 	<script src="./library/middleware.js"></script>
+</head>
+<body>
+	<div class="form-login">
+	
+
+	<input type="text" id="email">
+	<input type="text" id="nama">
+	<input type="password" id="pass">
+	<div class="buttons">
+		<button id="signup">SignUp</button>
+		<button id="cancel"><a href="index.html">cancel</a></button>
+
+	</div>
+	<h3 id="log"></h3>
+</div>
+<button id="getid">get</button>
+	
+	<script>
+	//Middleware 
+/*	Middleware.pageLoginAndSignup();
+*/
+/*	Auth.logOut();	
+*/	//get element
+	var email = document.getElementById('email');
+	var nama = document.getElementById('nama');
+	var pass = document.getElementById('pass');
+	var signup = document.getElementById('signup');
+	var cancel = document.getElementById('cancel');
+	//auth signup
+	signup.addEventListener('click',()=>{
+
+		 Auth.signUp(email.value,pass.value,nama.value);
+	});
+
+	
+	</script>
+
+
+</body>
+</html>
