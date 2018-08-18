@@ -32,11 +32,12 @@ Auth.signUp = function(email,pass,nama){
 	 auth.createUserWithEmailAndPassword(email, pass)
     .then(()=>{
       //when success
-      console.log("success");
+      console.log("create email success");
       auth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
       Database.createData(nama,email,user.uid);
+      console.log("create user's database success");
       }
 });
 
