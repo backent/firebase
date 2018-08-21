@@ -1,14 +1,16 @@
 
 var Middleware= {};
 
+Middleware.unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+});
 Middleware.pageLoginAndSignup = function(){
+    // handle it
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
    uid = user.uid;
    window.location.assign("C:/Users/L1-11/Desktop/New folder/index.html");
-   
   }
   else{
 
@@ -21,7 +23,6 @@ Middleware.pageUser = function(){
   if (user) {
     // User is signed in.
    uid = user.uid;
-
   }
   else{
   

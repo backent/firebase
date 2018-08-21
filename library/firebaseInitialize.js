@@ -12,5 +12,5 @@
   firebase.initializeApp(config);
 
   //loginMiddlewere
-  var uid = '';
+  var uid = null;
   

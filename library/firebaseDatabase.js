@@ -8,7 +8,7 @@ Database.createData = function(nama,email,uid){
     ref.set({
       'email' : email,
       'nama' : nama, 
-      'photoProfulUrl' : '',
+      'photoProfileUrl' : '',
       'statusProfil': '',
   
     })
@@ -33,3 +33,7 @@ Database.updateData = function(data,uid){
 
 	});
 };
+
+Database.readData = function(uid){
+	var ref = database.ref('users'+uid);
+}

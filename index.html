@@ -6,9 +6,42 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
-		
+	<script src="./library/firebaseInitialize.js"></script>	
+	<script src="./library/firebaseAuth.js"></script>	
 </head>
 <body>
 	<h1>HAI</h1>
+	<button id="login"><a href="login.html">login</a></button>
+	<button id="logout">logout</button>
+	<button id="beranda"><a href="beranda.html">beranda</a></button>
+
+	<script>
+
+		//get element
+		var login = document.getElementById('login');
+		var logout = document.getElementById('logout');
+		login.style.display= "none";
+		logout.style.display= "none";
+		beranda.style.display= "none";
+
+		firebase.auth().onAuthStateChanged(user=>{
+			if(user){
+				login.style.display = "none";
+				logout.style.display = "initial";
+				beranda.style.display= "initial";
+			}
+			else if(!user){
+		beranda.style.display= "none";
+			login.style.display = "initial";
+				logout.style.display = "none";
+			}
+		});
+
+		logout.addEventListener('click',()=>{
+			Auth.logOut();
+		});
+
+	
+	</script>
 </body>
 </html>
