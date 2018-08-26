@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../css/updateProfile.css">
+	<link rel="stylesheet" type="text/css" href="../css/tambahMusic.css">
 	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
 	<script src="../library/firebaseInitialize.js"></script>	
 	<script src="../library/firebaseAuth.js"></script>	
@@ -20,6 +20,7 @@
 		<label for="musicName">Music Name</label>
 		<input id="musicName" type="text" name="" placeholder="Enter Music Name . . .">
 		<br>
+		<span id="logupdateMusic"></span>
 		
 		<button id="update">update</button>
 		<a href="./profile.html"><button>Kembali</button></a>
@@ -33,6 +34,8 @@
 		var musics = document.getElementById('music');
 		var uploader  = document.getElementById('uploader');
 		var label = document.getElementById('input');
+		
+		var logupdateMusic = document.getElementById('logupdateMusic');
 		musics.style.display = "none";
 		uploader.style.display = "none";
 		var musicData;
@@ -59,10 +62,12 @@
 				}
 							
 				if(musicData && nameOfMusic){
+					logupdateMusic.innerText = "";
 					uploader.style.display = "initial";
 					Storage.createMediaMusic('users/'+ uid + '/musicAlbum/',nameOfMusic,musicData,uploader,(err,mess)=>{
 						if(!err){
 							console.log(mess);
+							logupdateMusic.innerText = "Berhasil Menambahkan";
 						}
 						else if(err){
 							console.log(err);

@@ -44,3 +44,7 @@ div input{
 div input[type=file]{
     display: none;  
 }
+
+#logupdateMusic{
+    color: #27ae60;
+}

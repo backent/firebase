@@ -44,3 +44,11 @@ div input{
 div input[type=file]{
     display: none;  
 }
+
+textarea{
+    resize: none;
+}
+
+span{
+    color: #27ae60;
+}

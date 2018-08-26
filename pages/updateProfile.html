@@ -20,14 +20,17 @@
 			<input id="image" type="file" accept="image/*">
 		</label>
 		<progress value="0" max="100" id="uploader">0%</progress>
+		<span id="updateFoto"></span>
 		<br>
 		<label for="nama">nama</label>
 		<br>
 		<input type="text" id="nama" placeholder="name here . . .">
+		<span id="updateNama"></span>
 		<br>
 		<label for="inputStatusProfil">Status</label> 
 		<br>
-		<input id="inputStatusProfil" placeholder="status here . . ."></input>
+		<textarea maxlength="255" rows="5" cols="50" id="inputStatusProfil" placeholder="status here . . ."></textarea>
+		<span id="updateStatus"></span>
 
 		<button id="update">update</button>
 		<a href="./profile.html"><button>Kembali</button></a>
@@ -44,6 +47,9 @@
 		var uploader  = document.getElementById('uploader');
 		var inputStatusProfil = document.getElementById('inputStatusProfil');
 		var btnInput = document.getElementById('btnInput');
+		var updatednama = document.getElementById('updatednama');
+		var updateStatus = document.getElementById('updateStatus');
+		var updateFoto = document.getElementById('updateFoto');
 
 		
 		var imgData;
@@ -70,9 +76,11 @@
 				//updatednama here
 				databuffer['nama'] = nama.value.trim();
 				if(databuffer.nama){
+					updateNama.innerText = "";
 					Database.updateData({'nama': databuffer.nama}, 'users/'+uid,(err,mess)=>{
 						if (!err) {
 						console.log(mess);
+						updateNama.innerText = "Update Nama Berhasil";
 						}
 						else if(err){
 							console.log(err);
@@ -83,10 +91,11 @@
 				databuffer['status'] = inputStatusProfil.value.trim();
 				
 				if(databuffer.status){
-					console.log(databuffer.status)
+					updateStatus.innerText = "";					
 					Database.updateData({'statusProfil': databuffer.status}, 'users/'+uid,(err,mess)=>{
 						if (!err) {
 						console.log(mess);
+					updateStatus.innerText = "Update Status Berhasil";					
 						}
 						else if(err){
 							console.log(err);
@@ -98,9 +107,11 @@
 				//update foto here
 				if(imgData){
 					uploader.style.display ="initial";
+					updateFoto.innerText = "";
 					Storage.createMedia('users/'+ uid + '/photoProfile.jpg',imgData,uploader,(err,mess)=>{
 						if(!err){
 							console.log(mess);
+							updateFoto.innerText = "Update Foto Berhasil";
 						}
 						else if(err){
 							console.log(err);
