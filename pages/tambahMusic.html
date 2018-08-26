@@ -32,6 +32,7 @@
 		var musicName = document.getElementById('musicName');
 		var musics = document.getElementById('music');
 		var uploader  = document.getElementById('uploader');
+		var label = document.getElementById('input');
 		musics.style.display = "none";
 		uploader.style.display = "none";
 		var musicData;
@@ -58,6 +59,7 @@
 				}
 							
 				if(musicData && nameOfMusic){
+					uploader.style.display = "initial";
 					Storage.createMediaMusic('users/'+ uid + '/musicAlbum/',nameOfMusic,musicData,uploader,(err,mess)=>{
 						if(!err){
 							console.log(mess);
@@ -76,6 +78,7 @@
 			musics.addEventListener('change',e=>{
 				musicData = e.target.files[0];
 				console.log("sukses terganti");
+				label.innerText = "File Ready";
 			});
 		});		
 	</script>

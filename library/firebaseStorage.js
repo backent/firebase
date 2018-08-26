@@ -21,7 +21,7 @@ Storage.createMedia = function(referensi,media,progressElement,callback){
 		storageRef.getDownloadURL().then(url=>{
 		databuffer['photoProfileUrl'] = url.toString();
 		if(databuffer.photoProfileUrl){
-					Database.updateData({'photoProfileUrl': databuffer.photoProfileUrl}, uid,(err,mess)=>{
+					Database.updateData({'photoProfileUrl': databuffer.photoProfileUrl}, 'users/'+uid,(err,mess)=>{
 						if (!err) {
 						console.log(mess);
 						callback(false, "upload Media Berhasil");
