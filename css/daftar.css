@@ -9,19 +9,26 @@
 	border: 1px solid black;
 	width: 466px;
 	height: 471px;
+	margin: auto;
+	display: flex;
+	flex-flow: column; 	
 	justify-content: center;
+	align-items: center;
 }
 
-.daftar label {
+.daftar div label {
 	font-size: 23px;
     color : #A3ACE4;
 
 }
 
-.daftar label b {
+.daftar div label b {
     font-size: 23px;
     color: #A3ACE4;
     height: 23px
     width: 110px;
+}
+.daftar div input{
+	width: 200px;
 }
 

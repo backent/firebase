@@ -9,13 +9,14 @@
 	<script type="text/javascript" src="../library/firebaseInitialize.js"></script>
 	<script src="../library/firebaseAuth.js"></script>	
 	<script src="../library/firebaseStorage.js"></script>	
+	<script src="../library/middleware.js"></script>	
 </head>
 <body>
 
 	<section>
 		<div class="group1">
 			<img id="profilePict" src="">
-		</div>
+		
 
 		<div class="group_label">
 			<h1 id="nama">nama band</h1>
@@ -23,7 +24,8 @@
 			<h3 id="statusProfilText"></h3>	
 			<button><a href="updateProfile.html">edit</a></button>
 		</div>
-		<a href="tambahMusic.html">Tambah Music</a>
+		</div>
+		<a href="tambahMusic.html"><button>Tambah Music</button></a>
 <!-- 		<div class="group_playlist">
 			<h1>Playlist</h1>
 			<h2>judul Lagu</h2>
@@ -36,13 +38,15 @@
 
 		</div> -->
 		<div id="homeButton" class="button">
-			<button>Home</button>
+			<a href="./home.html"><button>Home</button></a>
 			
 		</div>
 		<div id="test"></div>
 	</section>
 
 	<script type="text/javascript">
+		//middleware
+		Middleware.pageUser();
 		//get element
 		var pp = document.getElementById('profilePict');
 		var nama = document.getElementById('nama');
@@ -80,9 +84,7 @@
 					var div = document.createElement("div");
 				    div.className = "group_playlist";
 				    var h1 = document.createElement("h1");
-				    h1.innerText = "Playlist";
-				    var h2 = document.createElement("h2");
-				    h2.innerText = namaMusic;
+				    h1.innerText = namaMusic;
 				    var audio = document.createElement("AUDIO");
 			        audio.setAttribute("src",musicUrl.val());
 					var div2 = document.createElement("div");
@@ -93,7 +95,6 @@
 				    var button3 = document.createElement("button");
 				    button3.innerText = "stop";
 				    div.appendChild(h1);
-				    div.appendChild(h2);
 				    div.appendChild(audio);
 				    div2.appendChild(button1);
 				    div2.appendChild(button2);

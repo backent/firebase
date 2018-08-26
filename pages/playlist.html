@@ -11,10 +11,10 @@
 </head>
 <body>
     <div class="nav">
-    <h3><a href="./home.html">Home</a></h3>
-      <input type="text" name="">
+      <h3><a href="./home.html">Home</a></h3>
+      <!-- <input type="text" name="">
       <img src="../img/search.png">
-
+ -->
     </div>
     
     <section  class="playlist1">
@@ -25,12 +25,14 @@
 
         <div class="kotak2">
           <audio></audio>
+          <h3 id="currentTimeDisplay">00:00</h3>
           <div class="progress">
             <div id="progress-bar" class="progress-bar"></div>
           </div>
+          <h3 id="durationDisplay">00:00</h3>
         </div>    
         <div class="kotak3">
-          <h1>nama-lagu</h1>
+          <h1 id="namaLaguPlay">nama-lagu</h1>
 
           <div class="button">
             <img id="rewind" src="../img/rewind.png">
@@ -68,10 +70,14 @@
       var stopBtn = document.getElementById('stop');
       var rewindBtn = document.getElementById('rewind');
       var forwardBtn = document.getElementById('forward');
+      var volumeBtn = document.getElementById('volume');
       var audio = document.getElementsByTagName('audio')[0];
       var progress = document.getElementById('progress-bar');
+      var currentTimeDisplay = document.getElementById('currentTimeDisplay');
+      var durationDisplay = document.getElementById('durationDisplay');
       
       var photoProfile = document.getElementById('photoProfile');
+      var namaLaguPlay = document.getElementById('namaLaguPlay');
      
       var allMusicData = firebase.database().ref("users/");
 
@@ -92,7 +98,7 @@
                 h1.innerText = namaBand + " - " + musicName;
                 div.appendChild(h1);
                 allPlaylist.appendChild(div);
-                clicked(div,audio,musicUrl,photoProfile,ppUrl);                
+                clicked(div,audio,musicUrl,photoProfile,ppUrl,musicName);                
               }
             });
            });
@@ -108,12 +114,26 @@
       stop(stopBtn,audio);
       rewind(rewindBtn,audio);
       forward(forwardBtn,audio);
+      sound(volumeBtn,audio);
 
       audio.addEventListener("timeupdate",()=>{
         var currentTime = audio.currentTime;
         var duration = audio.duration;
         var progressTime  =  (currentTime / duration) * 100;
         progress.style.width = progressTime.toString() + "%";
+
+        if(currentTime && duration){
+        var cminutes = Math.floor(currentTime / 60);
+        
+        var cseconds = Math.floor(currentTime%60);
+
+        var dminutes = Math.floor(duration / 60);
+    
+        var dseconds = Math.floor(duration%60);
+
+        currentTimeDisplay.innerText = cminutes.toString() + ":" + cseconds.toString();
+        durationDisplay.innerText =  dminutes.toString() + ":" + dseconds.toString();
+      }
       });
       
       function play(theButton,theAudio){
@@ -154,14 +174,51 @@
         });
       }
 
-        function clicked(obj,theAudio,musicUrl,theProfilePhoto,theProfilePhotoUrl){
+      function sound(theButton,theAudio){
+        var currentStatus = 'volume1';
+        theAudio.volume = 0.3;
+        theButton.addEventListener('click',()=>{
+          if (currentStatus == 'volume1') {
+            theButton.src = "../img/volume-2.png"
+            theAudio.volume = 0.6;
+            currentStatus = 'volume2';
+
+
+
+          }
+          else if (currentStatus == 'volume2') {
+            theButton.src = "../img/volume-3.svg"
+            theAudio.volume = 1;
+            currentStatus = 'volume3';
+
+          }
+          else if (currentStatus == 'volume3') {
+            theButton.src = "../img/volume-mute.png"
+            theAudio.volume = 0;
+            currentStatus = 'mute';
+
+          }
+          else if (currentStatus == 'mute') {
+            theButton.src = "../img/volume.png"
+            theAudio.volume = 0.3;
+            currentStatus = 'volume1';
+
+          }
+
+        });
+      }
+
+        function clicked(obj,theAudio,musicUrl,theProfilePhoto,theProfilePhotoUrl,namaLagu){
           obj.addEventListener('click',()=>{
             theAudio.setAttribute("src",musicUrl);
             theAudio.pause();
             theAudio.currentTime = 0;
             console.log(theProfilePhotoUrl);
             theProfilePhoto.style.backgroundImage = "url("+theProfilePhotoUrl+")";
-          
+            namaLaguPlay.innerText = namaLagu;
+            currentTimeDisplay.innerText = "00:00";
+            durationDisplay.innerText = "00:00";
+
           });
         }
     </script>

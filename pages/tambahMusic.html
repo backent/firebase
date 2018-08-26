@@ -2,27 +2,40 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/updateProfile.css">
 	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
 	<script src="../library/firebaseInitialize.js"></script>	
 	<script src="../library/firebaseAuth.js"></script>	
 	<script src="../library/firebaseStorage.js"></script>	
 	<script src="../library/firebaseDatabase.js"></script>	
+	<script src="../library/middleware.js"></script>	
 
 </head>
 <body>
-	<input id="music" type="file" accept="audio/*">
-	<input id="musicName" type="text" name="">
-	<progress value="0" max="100" id="uploader">0%</progress>
-	<br>
-	
-	<button id="update">update</button>
+	<div>
+		<label id="input" for="music" class="input">Add Music Here</label>
+		<progress value="0" max="100" id="uploader">0%</progress>
+		<input id="music" type="file" accept="audio/*">
+		<br>
+		<label for="musicName">Music Name</label>
+		<input id="musicName" type="text" name="" placeholder="Enter Music Name . . .">
+		<br>
+		
+		<button id="update">update</button>
+		<a href="./profile.html"><button>Kembali</button></a>
+	</div>
 	<script>
+		//middleware
+		Middleware.pageUser();
 		//get element
 		var update = document.getElementById('update');
 		var musicName = document.getElementById('musicName');
 		var musics = document.getElementById('music');
 		var uploader  = document.getElementById('uploader');
+		musics.style.display = "none";
+		uploader.style.display = "none";
 		var musicData;
+
 		var databuffer = {};
 		//most logic happend here
 		firebase.auth().onAuthStateChanged(user=>{
@@ -35,7 +48,14 @@
 
 			//update
 			update.addEventListener('click',()=>{
-				var nameOfMusic = musicName.value;
+				var nameOfMusic = musicName.value.trim();
+
+				if (!nameOfMusic) {
+					alert("Please Input Music Name");
+				}
+				if (!musicData) {
+					alert("Please Input Some Music");
+				}
 							
 				if(musicData && nameOfMusic){
 					Storage.createMediaMusic('users/'+ uid + '/musicAlbum/',nameOfMusic,musicData,uploader,(err,mess)=>{

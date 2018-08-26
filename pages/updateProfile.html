@@ -5,38 +5,51 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
+	<link rel="stylesheet" type="text/css" href="../css/updateProfile.css">
 	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
 	<script src="../library/firebaseInitialize.js"></script>	
 	<script src="../library/firebaseAuth.js"></script>	
 	<script src="../library/firebaseStorage.js"></script>	
 	<script src="../library/firebaseDatabase.js"></script>	
+	<script src="../library/middleware.js"></script>	
  </head>
 <body>
-	<input id="image" type="file" accept="image/*">
-	<progress value="0" max="100" id="uploader">0%</progress>
-	<br>
-	<label for="nama">nama</label>
-	<input type="text" id="nama" placeholder="name here . . .">
-	<br>
-	hai <br>
-	<input id="inputStatusProfil" placeholder="status here . . ."></input>
+	<div>
+		<label id="btnInput" for="image" class="input">
+			Change Photo
+			<input id="image" type="file" accept="image/*">
+		</label>
+		<progress value="0" max="100" id="uploader">0%</progress>
+		<br>
+		<label for="nama">nama</label>
+		<br>
+		<input type="text" id="nama" placeholder="name here . . .">
+		<br>
+		<label for="inputStatusProfil">Status</label> 
+		<br>
+		<input id="inputStatusProfil" placeholder="status here . . ."></input>
 
-	<button id="update">update</button>
-	<button id="test">test</button>
+		<button id="update">update</button>
+		<a href="./profile.html"><button>Kembali</button></a>
+
+	</div>
+
 	<script>
+		//middleware
+		Middleware.pageUser();
 		//get element
 		var nama = document.getElementById('nama');
 		var update = document.getElementById('update');
 		var images = document.getElementById('image');
 		var uploader  = document.getElementById('uploader');
 		var inputStatusProfil = document.getElementById('inputStatusProfil');
-		var test = document.getElementById('test');
-		test.addEventListener('click',()=>{
-			console.log(inputStatusProfil.value);
-		});
+		var btnInput = document.getElementById('btnInput');
 
+		
 		var imgData;
 		var databuffer = {};
+
+		uploader.style.display = "none";
 		//most logic happend here
 		firebase.auth().onAuthStateChanged(user=>{
 			uid = user.uid;
@@ -82,7 +95,9 @@
 
 				}
 				
+				//update foto here
 				if(imgData){
+					uploader.style.display ="initial";
 					Storage.createMedia('users/'+ uid + '/photoProfile.jpg',imgData,uploader,(err,mess)=>{
 						if(!err){
 							console.log(mess);
@@ -100,7 +115,9 @@
 			
 			images.addEventListener('change',e=>{
 				imgData = e.target.files[0];
+				btnInput.innerText = "File Ready";
 				console.log("sukses terganti");
+				console.log(imgData.result);
 			});
 
 			

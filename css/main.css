@@ -12,6 +12,7 @@
 	width: 100%;
 	height: 44px;
 	background-color: rgba(255,255,255,33%);
+	display: flex;
 }
 
 
@@ -23,6 +24,19 @@
 	font-style: ;
 	font-weight: 600;
 	margin-left: 17px;
+
+
+}
+
+.section-1 nav h2{
+	font-size: 15px ;
+	line-height: 44px ;
+	color: #111 ;
+	font-style: ;
+	font-weight: 600;
+	margin-left: auto;
+	margin-right: 20px;
+	cursor: pointer;
 
 
 } 

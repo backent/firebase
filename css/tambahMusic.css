@@ -1,0 +1,46 @@
+
+
+body div {
+    border: 1px solid black;
+    width: 466px;
+    height: 471px;
+    margin: auto;
+    display: flex;
+    flex-flow: column;  
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 5px;
+    color: #111;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+
+}
+
+div label {
+    font-size: 23px;
+    color : #A3ACE4;
+
+}
+
+div label b {
+    font-size: 23px;
+    color: #A3ACE4;
+    height: 23px
+    width: 110px;
+}
+div input{
+    width: 200px;
+}
+
+div input[type=file]{
+    display: none;  
+}

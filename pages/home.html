@@ -13,12 +13,13 @@
 
 <section class="section-1">
 	<nav>
-		<a id="login" href="login">Login</a>
+		<a id="login" href="login.html">Login</a>
 		<a id="profile" href="profile.html"> profile</a>
 		<span>|</span>
 		<a id="daftar" href="daftar.html">Daftar</a>
 		<a href="">Tentang</a>
 		<a href="playlist.html">Playlist</a>
+		<h2 id="logout">Logout</h2>
 	</nav>
 	</nav>
 </section>
@@ -38,8 +39,8 @@
 
 	<footer>
 		<nav>
-			<a href="">Login</a>	
-			<a href="">Daftar</a>	
+			<a href="login.html">Login</a>	
+			<a href="daftar.html">Daftar</a>	
 			<a href="">Tentang</a>
 		
 		</nav>
@@ -60,18 +61,22 @@
 	//get element
 	var login = document.getElementById('login');
 	var profile = document.getElementById('profile');
+	var logout = document.getElementById('logout');
 	login.style.display= "none";
+	logout.style.display= "none";
 	profile.style.display= "none";
 	daftar.style.display = " none";
 
 	firebase.auth().onAuthStateChanged(user=>{
 		if(user){
 			login.style.display = "none";
+			logout.style.display = "initial";
 			daftar.style.display = "none";
 			profile.style.display = "initial";
 		}
 		else if(!user){
 		login.style.display = "initial";
+		logout.style.display = "none";
 			daftar.style.display = "initial";
 			profile.style.display = "none";
 		}
@@ -79,6 +84,10 @@
 
 	profile.addEventListener('click',()=>{
 		Auth.profile();
+	});
+
+	logout.addEventListener('click', ()=>{
+		Auth.logOut();
 	});
 </script>
 </body>

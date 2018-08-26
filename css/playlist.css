@@ -96,6 +96,7 @@ h1 {
   margin-left: 21px;
   display: block;
   font-size: 40px;
+  cursor: pointer;
 }
 
 .nav{
