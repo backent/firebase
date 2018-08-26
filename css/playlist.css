@@ -1,0 +1,120 @@
+/*body{
+  background-image: url('../img/background.jpg');
+  background-size: cover;
+}*/
+
+.playlist1{
+  display: flex;
+  flex-flow: row;
+}
+
+.keterangan{
+  display: flex;
+  flex-flow: column;
+}
+
+.kotak1{
+  border: 5px solid black;
+  width: 327px;
+  height: 327px;
+  margin-top: 48px;
+  margin-left: 92px;
+  margin-bottom: 0px;
+  background-size: 100%;
+
+}
+
+.kotak2{
+  border: 5px solid black;
+  width: 327px;
+  height: 25px;
+  margin-top: 0px;
+  margin-left: 92px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.kotak2 .progress{
+      width: 200px;
+      height: 10px;
+      background-color: #111;
+      margin: auto;
+
+    }
+
+.kotak2 .progress-bar{
+      height:100%;
+      background-color: blue;
+}
+
+.kotak3{
+  border: 5px solid black;
+  width: 327px;
+  height: 200px;
+  margin-left: 92px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.button{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  width: 170px;
+}
+img{
+  width: 34px;
+  height: 34px;
+}
+
+h1 {
+  width: 86px;
+  height: 25px;
+  margin-top: 6px;
+
+}
+
+.kotak4{
+  border: 5px solid black;
+  width: 878px;
+  height: 695px;
+  margin-left: 22px;
+  margin-top: 37px;
+  margin-bottom: 36px;
+}
+
+.kotak4 div{
+  width: 100%;
+  height: 44px;
+  border-bottom: 3px solid black;
+}
+.kotak4 h1{
+  width: 100%;
+  height: 44px;
+  margin-left: 21px;
+  display: block;
+  font-size: 40px;
+}
+
+.nav{
+  width:214px;
+  height: 37px;
+  margin-left: auto;
+  margin-right: 105px;
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row;
+}
+
+input{
+ background: transparent;
+ border: 1px solid black; 
+}
+
+.nav h3{
+  font-size: 40px;
+  margin-right: 12px;
+}
+

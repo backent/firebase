@@ -1,56 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>
-		
-	</title>
-	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
-	<link rel="stylesheet" href="">
-	<script src="./library/firebaseInitialize.js"></script>
-	<script src="./library/firebaseDatabase.js"></script>
-	<script src="./library/firebaseAuth.js"></script>
-	<script src="./library/middleware.js"></script>
+  <title></title>
+  <style type="text/css">
+   
+  </style>
 </head>
 <body>
-	<h1></h1>
-	<button></button>
-	<script>
-		Middleware.pageUser();
-		//get Element
-		var childCount;
-		var buton = document.getElementsByTagName('button');
-		console.log(buton);
-		buton[0].addEventListener('click',()=>{
-			console.log(childCount);
-			
-		});
-		firebase.auth().onAuthStateChanged(user=>{
-			uid = user.uid;
-			
-			var data = {};
-			var str = 'photo';
-			var theRef = firebase.database().ref('users/'+uid);
-			theRef.on('value',snap=>{
-				console.log(snap.val());
-			});
-			var childRef = theRef.child('photoAlbum');
-			childRef.on('value',snap=>{
-				 childCount = snap.numChildren();
-				console.log(snap.numChildren());
-				console.log(def);
-			});
-			var def ="hai";
-			//make key from variable
-			data[str+"2"] = "2";
-			console.log(data);
-			//@todo
-			//make key value from string 'photo' + snap.numChildre()
-			//that's for dinamicly making object.
-			
-			//NOTE : check var before and after event on
-		});
-	</script>
+
+  <div class="progress">
+
+    <div class="progress-bar">
+      
+    </div>
+      
+  </div>
 </body>
 </html>

@@ -4,7 +4,16 @@ var Auth ={};
 
 //login handler
 Auth.logIn = function(email,pass){
-	auth.signInWithEmailAndPassword(email, pass)
+  emailRegister = email.trim();
+  passRegister = pass.trim();
+  
+  if(emailRegister == "" || emailRegister == null){
+    return alert("email Required");
+  }
+  if(passRegister == "" || passRegister == null){
+    return alert("pass Required");
+  }
+	auth.signInWithEmailAndPassword(emailRegister, passRegister)
       .then(data=>{
         console.log(data);
       })
@@ -29,14 +38,28 @@ Auth.logOut = function(){
 
 //signup handler
 Auth.signUp = function(email,pass,nama){
-	 auth.createUserWithEmailAndPassword(email, pass)
+  emailRegister = email.trim();
+  passRegister = pass.trim();
+  namaRegister = nama.trim();
+
+  if(emailRegister == "" || emailRegister == null){
+    return alert("email Required");
+  }
+  if(passRegister == "" || passRegister == null){
+    return alert("pass Required");
+  }
+  if(namaRegister == "" || namaRegister == null){
+    return alert("nama Required");
+  }
+
+	 auth.createUserWithEmailAndPassword(emailRegister, passRegister)
     .then(()=>{
       //when success
       console.log("create email success");
       auth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-      Database.createData(nama,email,user.uid);
+      Database.createData(namaRegister,emailRegister,user.uid);
       console.log("create user's database success");
       }
 });

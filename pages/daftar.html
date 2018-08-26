@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+  <link rel="stylesheet" type="text/css" href="../css/daftar.css">
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script src="../library/firebaseInitialize.js"></script>
+  <script src="../library/firebaseAuth.js"></script>
+  <script src="../library/firebaseDatabase.js"></script>
+  <script src="../library/middleware.js"></script>
+</head>
+
+<section class="daftar">
+	<div>
+    <label for="email">
+      <b>Email</b>
+    </label>
+      
+    <input id="email" type="text" placeholder="Example@example.com" name="email" required>
+    <br>
+    <label for="nama">
+      <b>Nama</b>
+    </label>
+      
+    <input id="nama" type="text" placeholder="Masukan NamaBand" name="nama" required>
+    <br>
+    <label for="pass">
+
+    <b>Password</b></label>
+    <input id="pass" type="Password" placeholder="Masukan Password" name="Pass" required>
+    <br>
+    <button id="signup">Daftar</button>
+    <a href="./home.html"><button>Kembali</button></a>
+	</div>
+</section>
+<script type="text/javascript">
+  
+    //Middleware 
+  Middleware.pageLoginAndSignup();
+
+/*  Auth.logOut();  */
+  //get element
+  var email = document.getElementById('email');
+  var nama = document.getElementById('nama');
+  var pass = document.getElementById('pass');
+  var signup = document.getElementById('signup');
+  //auth signup
+  signup.addEventListener('click',()=>{
+
+     Auth.signUp(email.value,pass.value,nama.value);
+  });
+
+</script>
+

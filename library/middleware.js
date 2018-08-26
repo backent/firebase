@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
    uid = user.uid;
-   window.location.assign("C:/Users/L1-11/Desktop/New folder/index.html");
+   window.location.assign("./home.html");
   }
   else{
 
@@ -26,7 +26,7 @@ Middleware.pageUser = function(){
   }
   else{
   
-   window.location.assign("C:/Users/L1-11/Desktop/New folder/login.html");
+   window.location.assign("./login.html");
   }
 });
 };

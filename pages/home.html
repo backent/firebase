@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	
+	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+	<script type="text/javascript" src="../library/firebaseInitialize.js"></script>
+	<script type="text/javascript" src="../library/firebaseAuth.js"></script>
+</head>
+<body>
+
+<section class="section-1">
+	<nav>
+		<a id="login" href="login">Login</a>
+		<a id="profile" href="profile.html"> profile</a>
+		<span>|</span>
+		<a id="daftar" href="daftar.html">Daftar</a>
+		<a href="">Tentang</a>
+		<a href="playlist.html">Playlist</a>
+	</nav>
+	</nav>
+</section>
+
+<section class="section-2">
+	<h1> Daftar dan Dengarkan band kamu</h1>
+	<button>
+		Dapatkan sekarang
+	</button>
+	</section>
+
+	<section class="section-3">
+		<h1>Tentang</h1>
+		<div>kalsjdkashdkasdkhasahsldkaskldhlkkasdlkl</div>
+		
+	</section>
+
+	<footer>
+		<nav>
+			<a href="">Login</a>	
+			<a href="">Daftar</a>	
+			<a href="">Tentang</a>
+		
+		</nav>
+
+		<div>
+			<a href="">Facebook</a>
+			<a href="">Tweeter</a>	
+			<a href="">Instagram</a>
+		</div>
+
+	</footer>
+
+		
+		
+<script type="text/javascript" >
+	
+	
+	//get element
+	var login = document.getElementById('login');
+	var profile = document.getElementById('profile');
+	login.style.display= "none";
+	profile.style.display= "none";
+	daftar.style.display = " none";
+
+	firebase.auth().onAuthStateChanged(user=>{
+		if(user){
+			login.style.display = "none";
+			daftar.style.display = "none";
+			profile.style.display = "initial";
+		}
+		else if(!user){
+		login.style.display = "initial";
+			daftar.style.display = "initial";
+			profile.style.display = "none";
+		}
+	});
+
+	profile.addEventListener('click',()=>{
+		Auth.profile();
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+	<script src="../library/firebaseInitialize.js"></script>	
+	<script src="../library/firebaseAuth.js"></script>	
+	<script src="../library/firebaseStorage.js"></script>	
+	<script src="../library/firebaseDatabase.js"></script>	
+
+</head>
+<body>
+	<input id="music" type="file" accept="audio/*">
+	<input id="musicName" type="text" name="">
+	<progress value="0" max="100" id="uploader">0%</progress>
+	<br>
+	
+	<button id="update">update</button>
+	<script>
+		//get element
+		var update = document.getElementById('update');
+		var musicName = document.getElementById('musicName');
+		var musics = document.getElementById('music');
+		var uploader  = document.getElementById('uploader');
+		var musicData;
+		var databuffer = {};
+		//most logic happend here
+		firebase.auth().onAuthStateChanged(user=>{
+			uid = user.uid;
+			console.log(uid);
+			var data = 	firebase.database().ref('users/'+ uid);
+
+
+		
+
+			//update
+			update.addEventListener('click',()=>{
+				var nameOfMusic = musicName.value;
+							
+				if(musicData && nameOfMusic){
+					Storage.createMediaMusic('users/'+ uid + '/musicAlbum/',nameOfMusic,musicData,uploader,(err,mess)=>{
+						if(!err){
+							console.log(mess);
+						}
+						else if(err){
+							console.log(err);
+						}
+
+					});
+				}
+
+			});
+
+			//input music's data to var
+			
+			musics.addEventListener('change',e=>{
+				musicData = e.target.files[0];
+				console.log("sukses terganti");
+			});
+		});		
+	</script>
+</body>
+</html>

@@ -8,6 +8,7 @@
 	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
 	<script src="./library/firebaseInitialize.js"></script>	
 	<script src="./library/firebaseAuth.js"></script>	
+	<script src="./library/firebaseStorage.js"></script>	
 	<style>
 		#profilePict{
 			width: 300px;
@@ -27,6 +28,9 @@
 	
 	<button id="update"><a href="updateProfile.html">edit</a></button>
 
+
+	<button id="update"><a href="tambahMusic.html">tambah</a></button>
+
 	<script>
 		//get element
 		var pp = document.getElementById('profilePict');
@@ -34,15 +38,21 @@
 		var status = document.getElementById('status');
 
 		firebase.auth().onAuthStateChanged(user=>{
+			//get id user
 			uid = user.uid;
 			console.log(uid);
+			//reference for get data's user
 			var data = 	firebase.database().ref('users/'+ uid);
-
 			data.once('value',snap=>{
 				console.log(snap.val());
 				nama.innerText = snap.val().nama;
 				pp.style.backgroundImage = "url("+snap.val().photoProfileUrl+")";
 
+			});
+
+			//get all own music
+			Storage.getOwnMusic('users/'+uid+'/musicAlbum',obj=>{
+				console.log(obj);
 			});
 
 		});

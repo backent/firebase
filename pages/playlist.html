@@ -1,0 +1,169 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+  <link rel="stylesheet" type="text/css" href="../css/playlist.css">
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script type="text/javascript" src="../library/firebaseInitialize.js"></script>
+  <script type="text/javascript" src="../library/firebaseDatabase.js"></script>
+  <script type="text/javascript" src="../library/firebaseStorage.js"></script>
+  
+</head>
+<body>
+    <div class="nav">
+    <h3><a href="./home.html">Home</a></h3>
+      <input type="text" name="">
+      <img src="../img/search.png">
+
+    </div>
+    
+    <section  class="playlist1">
+      <div class="keterangan">
+        <div id="photoProfile" class="kotak1">
+          
+        </div>
+
+        <div class="kotak2">
+          <audio></audio>
+          <div class="progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>    
+        <div class="kotak3">
+          <h1>nama-lagu</h1>
+
+          <div class="button">
+            <img id="rewind" src="../img/rewind.png">
+            <img id="play" src="../img/play.png">
+            <img id="pause" src="../img/pause-2.png">
+            <img id="stop" src="../img/stop.png">
+            <img id="forward" src="../img/next.png">
+            <img id="volume" src="../img/volume.png">
+          </div>
+        </div>
+      </div>
+      
+      <div id="allPlaylist" class="kotak4">
+        <div>
+          <h1>nama - Lagu</h1>
+        </div>
+      </div>
+
+
+    </section>
+    <button id="test">test</button>
+    <script type="text/javascript">
+      /*@TODO : 
+      menampilkan semua data music pada database
+      mengurutkan*
+      ketika ditekan, memndahkan semua informasi kepada tag <audio>
+      +btn play, pause, stop, +10s, -10s, etc*/
+      var test = document.getElementById('test');
+      test.addEventListener('click',()=>{
+        console.log(Math.round(audio.currentTime) + " : " + Math.round(audio.duration));
+      });
+      var allPlaylist = document.getElementById('allPlaylist');
+      var playBtn = document.getElementById('play');
+      var pauseBtn = document.getElementById('pause');
+      var stopBtn = document.getElementById('stop');
+      var rewindBtn = document.getElementById('rewind');
+      var forwardBtn = document.getElementById('forward');
+      var audio = document.getElementsByTagName('audio')[0];
+      var progress = document.getElementById('progress-bar');
+      
+      var photoProfile = document.getElementById('photoProfile');
+     
+      var allMusicData = firebase.database().ref("users/");
+
+      allMusicData.once('value',(snap)=>{
+        snap.forEach(user=>{
+        var pp = user.val().photoProfileUrl;
+        var profileName = user.val().nama;
+          user.forEach(data=>{
+           data.forEach(musicData=>{
+            musicData.forEach(music=>{
+              if(typeof(music.val()) == 'string'){
+                var musicUrl = music.val();
+                var musicName = Storage.getNameMusic(musicUrl);
+                var ppUrl = pp;
+                var namaBand = profileName;
+                var div = document.createElement("div");
+                var h1 = document.createElement("h1");
+                h1.innerText = namaBand + " - " + musicName;
+                div.appendChild(h1);
+                allPlaylist.appendChild(div);
+                clicked(div,audio,musicUrl,photoProfile,ppUrl);                
+              }
+            });
+           });
+          });
+
+          
+
+        });
+      });
+
+      play(playBtn,audio);
+      pause(pauseBtn,audio);
+      stop(stopBtn,audio);
+      rewind(rewindBtn,audio);
+      forward(forwardBtn,audio);
+
+      audio.addEventListener("timeupdate",()=>{
+        var currentTime = audio.currentTime;
+        var duration = audio.duration;
+        var progressTime  =  (currentTime / duration) * 100;
+        progress.style.width = progressTime.toString() + "%";
+      });
+      
+      function play(theButton,theAudio){
+
+        theButton.addEventListener('click',()=>{
+          theAudio.play();
+
+        });
+        
+      }
+      function pause(theButton,theAudio){
+
+        theButton.addEventListener('click',()=>{
+          theAudio.pause();
+        });
+
+      }
+
+      function stop(theButton,theAudio){
+
+        theButton.addEventListener('click',()=>{
+          theAudio.pause();
+          theAudio.currentTime = 0;
+        });
+        }
+      
+      function rewind(theButton,theAudio){
+        theButton.addEventListener('click',()=>{
+        theAudio.currentTime -= 5;
+          
+        });
+      }
+
+      function forward(theButton,theAudio){
+        theButton.addEventListener('click',()=>{
+        theAudio.currentTime += 5;
+          
+        });
+      }
+
+        function clicked(obj,theAudio,musicUrl,theProfilePhoto,theProfilePhotoUrl){
+          obj.addEventListener('click',()=>{
+            theAudio.setAttribute("src",musicUrl);
+            theAudio.pause();
+            theAudio.currentTime = 0;
+            console.log(theProfilePhotoUrl);
+            theProfilePhoto.style.backgroundImage = "url("+theProfilePhotoUrl+")";
+          
+          });
+        }
+    </script>
+
+</body>

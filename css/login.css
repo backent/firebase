@@ -1,0 +1,33 @@
+.section-1 {
+    background-image: url('../img/Login.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.section-1 div{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.section-1 label {
+    font-size: 23px;
+    color : #A3ACE4;
+
+}
+
+.section-1 label b {
+    font-size: 23px;
+    color: #A3ACE4;
+    height: 23px
+    width: 110px;
+}
+
+.section-1 button, section-1 a{
+    width: 100%;    
+}

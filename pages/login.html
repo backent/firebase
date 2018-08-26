@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+    <script type="text/javascript" src="../library/firebaseInitialize.js"></script>
+    <script type="text/javascript" src="../library/firebaseAuth.js"></script>
+    <script type="text/javascript" src="../library/middleware.js"></script>
+</head>
+
+<body>
+<section class="section-1">
+
+<div>
+    <label for="uname">
+      <b>E-Mail</b>
+    </label>
+      
+    <input id="email" type="text" placeholder="Masukan UserName" name="uname" required>
+    <br>
+   
+    <label for="Pass">
+    
+    <b>Password</b></label>
+    <input id="pass" type="Password" placeholder="Masukan Password" name="Pass" required>
+    <br>
+    <button id="login">Login</button>
+    <a href="./daftar.html"><button>Daftar</button></a>
+    <a href="./home.html"><button>Kembali</button></a>
+</div>
+</section>
+
+<script type="text/javascript">
+        //Middleware 
+    Middleware.pageLoginAndSignup();
+    //get element
+
+    var email = document.getElementById('email');
+    var pass = document.getElementById('pass');
+    var login = document.getElementById('login');
+
+    //auth login
+    login.addEventListener('click',()=>{
+    Auth.logIn(email.value,pass.value);
+        
+    });
+
+
+</script>

@@ -1,0 +1,27 @@
+.daftar {
+	background-image: url('../img/background.jpg');
+	background-size: cover;
+	width: 100% ;
+	height: 768px;
+}
+
+.daftar div {
+	border: 1px solid black;
+	width: 466px;
+	height: 471px;
+	justify-content: center;
+}
+
+.daftar label {
+	font-size: 23px;
+    color : #A3ACE4;
+
+}
+
+.daftar label b {
+    font-size: 23px;
+    color: #A3ACE4;
+    height: 23px
+    width: 110px;
+}
+

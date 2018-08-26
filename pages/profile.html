@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="../css/profile.css">
+	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+	<script type="text/javascript" src="../library/firebaseInitialize.js"></script>
+	<script src="../library/firebaseAuth.js"></script>	
+	<script src="../library/firebaseStorage.js"></script>	
+</head>
+<body>
+
+	<section>
+		<div class="group1">
+			<img id="profilePict" src="">
+		</div>
+
+		<div class="group_label">
+			<h1 id="nama">nama band</h1>
+			<h2>descripsi</h2>
+			<h3 id="statusProfilText"></h3>	
+			<button><a href="updateProfile.html">edit</a></button>
+		</div>
+		<a href="tambahMusic.html">Tambah Music</a>
+<!-- 		<div class="group_playlist">
+			<h1>Playlist</h1>
+			<h2>judul Lagu</h2>
+			<audio></audio>
+			<div>
+			<button>play</button>
+			<button>pause</button>
+			<button>stop</button>
+			</div>
+
+		</div> -->
+		<div id="homeButton" class="button">
+			<button>Home</button>
+			
+		</div>
+		<div id="test"></div>
+	</section>
+
+	<script type="text/javascript">
+		//get element
+		var pp = document.getElementById('profilePict');
+		var nama = document.getElementById('nama');
+		var test = document.getElementById('test');
+		var statusProfilText = document.getElementById('statusProfilText');
+		var section = document.getElementsByTagName('section')[0];
+		var homeButton = document.getElementById('homeButton');
+		var div = document.createElement("div");
+		div.className = "malik";
+
+
+
+		firebase.auth().onAuthStateChanged(user=>{
+			//get id user
+			uid = user.uid;
+			console.log(uid);
+			//reference for get data's user
+			var data = 	firebase.database().ref('users/'+ uid);
+			data.once('value',snap=>{
+				console.log(snap.val());
+				nama.innerText = snap.val().nama;
+				statusProfilText.innerText = snap.val().statusProfil;
+				pp.setAttribute("src",snap.val().photoProfileUrl);
+
+			});
+
+			//get all own music
+			allMusicData = firebase.database().ref("users/"+ uid + "/musicAlbum");
+
+			allMusicData.once('value',(snap)=>{
+				snap.forEach(music=>{
+					music.forEach(musicUrl=>{
+					//append child
+					var namaMusic =	Storage.getNameMusic(musicUrl.val());
+					var div = document.createElement("div");
+				    div.className = "group_playlist";
+				    var h1 = document.createElement("h1");
+				    h1.innerText = "Playlist";
+				    var h2 = document.createElement("h2");
+				    h2.innerText = namaMusic;
+				    var audio = document.createElement("AUDIO");
+			        audio.setAttribute("src",musicUrl.val());
+					var div2 = document.createElement("div");
+				    var button1 = document.createElement("button");
+				    button1.innerText = "play";
+				    var button2 = document.createElement("button");
+				    button2.innerText = "pause";
+				    var button3 = document.createElement("button");
+				    button3.innerText = "stop";
+				    div.appendChild(h1);
+				    div.appendChild(h2);
+				    div.appendChild(audio);
+				    div2.appendChild(button1);
+				    div2.appendChild(button2);
+				    div2.appendChild(button3);
+				    div.appendChild(div2);
+				    section.insertBefore(div, homeButton);
+				    console.log(button1);
+				    console.log(button2);
+					play(button1,audio);
+					pause(button2,audio);
+					stop(button3,audio);
+					});
+
+				});
+			});
+
+
+
+
+			function play(theButton,theAudio){
+
+				theButton.addEventListener('click',()=>{
+					theAudio.play();
+				});
+				
+			}
+			function pause(theButton,theAudio){
+
+				theButton.addEventListener('click',()=>{
+					theAudio.pause();
+				});
+
+			}
+
+			function stop(theButton,theAudio){
+
+				theButton.addEventListener('click',()=>{
+					theAudio.pause();
+					theAudio.currentTime = 0;
+				});
+
+			}
+
+
+
+		});
+	</script>
+</body>
+</html>

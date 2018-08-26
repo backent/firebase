@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/resetStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="../css/setting.css">
+	<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+	<script type="text/javascript" src="../library/firebaseInitialize.js"></script>
+</head>
+<body>
+	<section class="section-1">
+		<form action="">
+			<div class="group1">
+			<input type="file" style="display: none;" name="poto" id="getFile" accept="image/*">
+			<div onclick="document.getElementById('getFile').click()"  class="foto" >
+			</div>
+			</div>
+		
+			<div class="group2">
+			<label>nama/band</label>
+			<input type="text" name="">
+
+			<label>Descripsi</label>
+			<input type="text" name="">
+
+			<label>judul lagu</label>
+			<input type="text" name="">
+
+
+			<label>Upload Lagu</label>
+			<input type="file" style="display: none;" name="Lagu" id="Lagu" accept="audio/*">
+			<div onclick="document.getElementById('Lagu').click()"  class="Lagu" >
+			</div>
+
+			<div class="group-button">
+				<button>Kembali</button>
+				<button onclick="document.getElementById('submitbutton').click()">Buat</button>
+				<input type="submit" name="submit" id="submitbutton" style="display: none;">
+			</div>
+
+			</div>
+			<div class="group3">
+				<label>Setting</label>
+			
+			</div>
+		</form>
+	</section>
+
+</body>

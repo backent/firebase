@@ -10,6 +10,8 @@ Database.createData = function(nama,email,uid){
       'nama' : nama, 
       'photoProfileUrl' : '',
       'statusProfil': '',
+      'musicAlbum' :'',
+      
   
     })
     .then(()=>{
@@ -22,15 +24,16 @@ Database.createData = function(nama,email,uid){
   });
 };
 
-Database.updateData = function(data,uid){
-	var ref = database.ref('users/'+uid);
+Database.updateData = function(data,referensi,callback){
+	var ref = database.ref(referensi);
 	ref.update(data)
-	.then(()=>{
-		//callback when success
+	.then(()=>{  
+		//callback when success 
+    callback(false,"update data berhasil");
 	})
 	.catch(error=>{
 		//when error
-
+    callback(error,"error")
 	});
 };
 

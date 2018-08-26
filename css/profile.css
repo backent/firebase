@@ -1,0 +1,107 @@
+section{
+	display: flex;
+	flex-flow: wrap;
+}
+.group1{
+	border: 1px solid black;
+	width: 343px;
+	height: 355px;
+
+}
+
+img {
+	width: 344px;
+	height: 355px;
+	background-size: cover;
+	
+
+}
+
+.group_label{
+	width: 812px;
+	height: 345px;
+	margin-left: 43px;
+	margin-top: 43px;
+	display: flex;
+	flex-flow: column;
+}
+
+.group_label h1{
+	font-size: 23px;
+	margin-bottom: 31px;
+}	
+
+.group_label h2{
+	font-size: 23px;
+	margin-bottom: 20px;
+}	
+.group_label h3{
+	width: 723px;
+	height: 200px;
+	font-size: 23px;
+	border: 1px solid black;
+	
+}	
+
+.group_label button{
+	width: 50px;
+	height: 25px;
+	margin-left: auto;
+	margin-right: 90px;
+	margin-top: 10px;
+
+}
+
+.group_playlist {
+	width: 723px;
+	height: 310px;
+	margin-left: 14px;
+	display: flex;
+	flex-flow: column;
+
+}
+.group_playlist h1 {
+	width: 177px;
+	height: 58px;
+	font-size: 55px;
+	margin-left: 14px;
+	margin-top: 38px;
+
+}
+
+.group_playlist h2 {
+	width: 177px;
+	height: 40px;
+	font-size: 21px;
+	margin-left: 14px;
+	margin-top: 38px;
+
+}
+ .group_playlist h3 {
+	width: 192px;
+	height: 25px;
+	font-size: 21px;
+	margin-left: 14px
+}
+ 
+.group_playlist button{
+	width: 88.43px;
+	height: 30.99px;
+}
+
+.button{
+	width: 159.41px;
+	height: 50px;
+	margin top: 682px; 
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+}
+
+
+
+
+
+
+
